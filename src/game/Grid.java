@@ -60,7 +60,6 @@ public class Grid {
 	public boolean checkForFullColumn(int col)
     {
         int row = 0;
-        System.out.println(col+"");
         if (col < 0 || col > 7){
             return false;
         }
