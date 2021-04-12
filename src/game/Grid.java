@@ -9,8 +9,10 @@ public class Grid {
 	//	o o o o o o o 
 	//	o o o o o o o 
 	//	o o R o o o o 
-	//	o o o o o o o 
-	private char[][] board = new char[6][7];
+	//	o o o o o o o
+	int ROW_COUNT = 6;
+	int COL_COUNT = 7;
+	private char[][] board = new char[ROW_COUNT][COL_COUNT];
 	public void populateBoard() {
 		for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
@@ -60,12 +62,12 @@ public class Grid {
 	public boolean checkForFullColumn(int col)
     {
         int row = 0;
-        if (col < 0 || col > 7){
+        if (col < 0 || col > COL_COUNT){
             return false;
         }
 
         //full column?
-        for(int r = 0; r < 6; r++) {
+        for(int r = 0; r < ROW_COUNT; r++) {
             if(board[r][col] == 'o') {
                 return true;
             }
