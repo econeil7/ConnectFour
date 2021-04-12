@@ -1,7 +1,7 @@
 package game;
 
 public class Player {
-	private int teamNum;
+  private int teamNum;
   private char tokenColor;
   
   Player(int num, char color) {
@@ -17,7 +17,7 @@ public class Player {
   	this.tokenColor = color;
   }
   
-  public char getColor() {
+  public char getTokenColor() {
   	return tokenColor; 
   }
   
