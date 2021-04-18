@@ -9,18 +9,33 @@ public class ConnectFourGame {
 		Player p2 = new Player(2, 'Y');
 		Scanner scanner = new Scanner(System.in);
 		Grid g = new Grid();
-		boolean running = true;
         g.populateBoard();
         g.displayBoard();
+        int col;
+        boolean proceed = true;
+        boolean running = true;
 		while (running)
         {
-            int col;
-            System.out.print("Player 1, please select a column: ");
-            col = scanner.nextInt();
-            g.placeToken(col, p1.getTokenColor());
-            System.out.println("Player 2, please select a column: ");
-            col = scanner.nextInt();
-            g.placeToken(col, p2.getTokenColor());
+			if (proceed)
+			{
+	            System.out.print("Player 1, please select a column: ");
+	            col = scanner.nextInt();
+	            proceed = g.placeToken(col, p1.getTokenColor());
+			}
+			else
+			{
+				proceed = true;
+			}
+			if (proceed)
+			{
+	            System.out.println("Player 2, please select a column: ");
+	            col = scanner.nextInt();
+	            proceed = g.placeToken(col, p2.getTokenColor());
+			}
+			else
+			{
+				proceed = true;
+			}
         }
         g.clearBoard();
         g.populateBoard();

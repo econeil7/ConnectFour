@@ -13,6 +13,7 @@ public class Grid {
 	int ROW_COUNT = 6;
 	int COL_COUNT = 7;
 	private char[][] board = new char[ROW_COUNT][COL_COUNT];
+	
 	public void populateBoard() {
 		for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
@@ -32,11 +33,11 @@ public class Grid {
 		System.out.println("-------------------------------------");
 	}
 	
-	public void placeToken(int chosenCol, char color) {
+	public boolean placeToken(int chosenCol, char color) {
 		boolean emptyCol = true;
-		boolean result = checkForFullColumn(chosenCol);
-		if(result) 
-		{ // column not full insert
+		boolean notFull = checkForFullColumn(chosenCol);
+		if(notFull) 
+		{
 			for (int row = 0; row < board.length; row++) {
 				if (board[row][chosenCol] != 'o') {
 					board[row-1][chosenCol] = color;
@@ -48,14 +49,12 @@ public class Grid {
 				board[5][chosenCol] = color;
 			}
 			displayBoard();
+			return true;
 		}
-		else //throw error
+		else
         {
-            try {
-                throw new Exception("The column is full");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+			System.out.println("That column is full!");
+			return false;
         }
 	}
 	
