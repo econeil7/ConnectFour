@@ -25,7 +25,7 @@ public class Grid {
 	}
   
 	public void displayBoard() {
-		System.out.println("0 1 2 3 4 5 6");
+		System.out.println("1 2 3 4 5 6 7");
 		for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 System.out.print(board[row][col] + " ");
@@ -36,6 +36,7 @@ public class Grid {
 	}
 	
 	public boolean placeToken(int chosenCol, char color) {
+		chosenCol = chosenCol - 1; // changing user selected column to 0 base
 		boolean gameDraw = false;
 		boolean emptyCol = true;
 		boolean notFull = checkForFullColumn(chosenCol);
