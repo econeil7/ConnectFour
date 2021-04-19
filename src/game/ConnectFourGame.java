@@ -20,7 +20,7 @@ public class ConnectFourGame {
 			{
 	            System.out.print("Player 1, please select a column: ");
 	            col = scanner.nextInt();
-	            proceed = g.placeToken(col, p1.getTokenColor());
+	            proceed = g.placeToken(col, p1);
 			}
 			else
 			{
@@ -30,7 +30,7 @@ public class ConnectFourGame {
 			{
 	            System.out.println("Player 2, please select a column: ");
 	            col = scanner.nextInt();
-	            proceed = g.placeToken(col, p2.getTokenColor());
+	            proceed = g.placeToken(col, p2);
 			}
 			else
 			{

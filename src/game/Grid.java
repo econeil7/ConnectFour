@@ -35,30 +35,41 @@ public class Grid {
 		System.out.println("-------------------------------------");
 	}
 	
-	public boolean placeToken(int chosenCol, char color) {
+	public boolean placeToken(int chosenCol, Player p) {
 		chosenCol = chosenCol - 1; // changing user selected column to 0 base
 		boolean gameDraw = false;
+		boolean gameWin = false;
 		boolean emptyCol = true;
 		boolean notFull = checkForFullColumn(chosenCol);
 		if(notFull) 
 		{
 			for (int row = 0; row < board.length; row++) {
 				if (board[row][chosenCol] != 'o') {
-					board[row-1][chosenCol] = color;
+					board[row-1][chosenCol] = p.getTokenColor();
 					emptyCol = false;
 					break;
 				}
 			}
 			if (emptyCol) {
-				board[5][chosenCol] = color;
+				board[5][chosenCol] = p.getTokenColor();
 			}
 			displayBoard();
 			movesMade++;
-			gameDraw = checkMaxMoves();
-			if (gameDraw)
+			
+			gameWin = checkForWin();
+			if (gameWin)
 			{
 				clearBoard();
-				displayBoard();
+				System.out.println("Player " + p.getTeamNum() + " wins!");
+			}
+			else
+			{
+				gameDraw = checkMaxMoves();
+				if (gameDraw)
+				{
+					clearBoard();
+					displayBoard();
+				}
 			}
 			return true;
 		}
@@ -99,7 +110,7 @@ public class Grid {
 
 	
 	public boolean checkForWin() {
-	  return true;
+	  return false;
 	}
 	  
 	public void clearBoard()
@@ -109,6 +120,7 @@ public class Grid {
             	board[row][col] = 'o';
             }
         }
+        movesMade = 0;
     }
   
 }
