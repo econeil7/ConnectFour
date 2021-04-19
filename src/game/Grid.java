@@ -12,6 +12,8 @@ public class Grid {
 	//	o o o o o o o
 	int ROW_COUNT = 6;
 	int COL_COUNT = 7;
+	int maxMoves = ROW_COUNT * COL_COUNT;
+	int movesMade = 0;
 	private char[][] board = new char[ROW_COUNT][COL_COUNT];
 	
 	public void populateBoard() {
@@ -34,6 +36,7 @@ public class Grid {
 	}
 	
 	public boolean placeToken(int chosenCol, char color) {
+		boolean gameDraw = false;
 		boolean emptyCol = true;
 		boolean notFull = checkForFullColumn(chosenCol);
 		if(notFull) 
@@ -49,6 +52,13 @@ public class Grid {
 				board[5][chosenCol] = color;
 			}
 			displayBoard();
+			movesMade++;
+			gameDraw = checkMaxMoves();
+			if (gameDraw)
+			{
+				clearBoard();
+				displayBoard();
+			}
 			return true;
 		}
 		else
@@ -73,6 +83,19 @@ public class Grid {
         }
         return false;
     }
+	
+	public boolean checkMaxMoves()
+	{
+		if (movesMade >= maxMoves)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	
 	public boolean checkForWin() {
 	  return true;
