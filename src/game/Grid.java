@@ -10,10 +10,10 @@ public class Grid {
 	//	o o o o o o o 
 	//	o o R o o o o 
 	//	o o o o o o o
-	int ROW_COUNT = 6;
-	int COL_COUNT = 7;
-	int maxMoves = ROW_COUNT * COL_COUNT;
-	int movesMade = 0;
+	private int ROW_COUNT = 6;
+	private int COL_COUNT = 7;
+	private int maxMoves = ROW_COUNT * COL_COUNT;
+	private int movesMade = 0;
 	private char[][] board = new char[ROW_COUNT][COL_COUNT];
 	
 	public void populateBoard() {
@@ -40,6 +40,7 @@ public class Grid {
 		boolean gameDraw = false;
 		boolean gameWin = false;
 		boolean emptyCol = true;
+		int x;
 		boolean notFull = checkForFullColumn(chosenCol);
 		if(notFull) 
 		{
@@ -47,16 +48,18 @@ public class Grid {
 				if (board[row][chosenCol] != 'o') {
 					board[row-1][chosenCol] = p.getTokenColor();
 					emptyCol = false;
+					x = row-1;
 					break;
 				}
 			}
 			if (emptyCol) {
 				board[5][chosenCol] = p.getTokenColor();
+				x = 5;
 			}
 			displayBoard();
 			movesMade++;
 			
-			gameWin = checkForWin();
+			gameWin = checkForWin(x, chosenCol, p);
 			if (gameWin)
 			{
 				clearBoard();
@@ -109,8 +112,33 @@ public class Grid {
 	}
 
 	
-	public boolean checkForWin() {
-	  return false;
+	public boolean checkForWin(int x, int y, Player p) {
+		if (checkHorizontalWin(x, y, p) || checkVerticalWin(x, y, p) || checkDiagonalWin(x, y, p))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean checkHorizontalWin(int x, int y, Player p) 
+	{
+		// check Y of [x][y]
+		return false;
+	}
+	
+	public boolean checkVerticalWin(int x, int y, Player p) 
+	{
+		// check X of [x][y]
+		return false;
+	}
+	
+	public boolean checkDiagonalWin(int x, int y, Player p) 
+	{
+		// check [x-1][y+1] and [x+1][y-1] for / OR check [x+1][y+1] and [x-1][y-1] for \
+		return false;
 	}
 	  
 	public void clearBoard()
