@@ -40,7 +40,7 @@ public class Grid {
 		boolean gameDraw = false;
 		boolean gameWin = false;
 		boolean emptyCol = true;
-		int x;
+		int x = -1;
 		boolean notFull = checkForFullColumn(chosenCol);
 		if(notFull) 
 		{
@@ -138,6 +138,128 @@ public class Grid {
 	public boolean checkDiagonalWin(int x, int y, Player p) 
 	{
 		// check [x-1][y+1] and [x+1][y-1] for / OR check [x+1][y+1] and [x-1][y-1] for \
+		int diagonalCount = 1;
+		int origX = x;
+		int origY = y;
+		
+		// check \
+		// northwest
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+				x--;
+				y--;
+				if (board[x][y] == p.getTokenColor())
+				{
+					diagonalCount++;
+					if (diagonalCount >= 4)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					x = origX;
+					y = origY;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
+		// southeast
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+				x++;
+				y++;
+				if (board[x][y] == p.getTokenColor())
+				{
+					diagonalCount++;
+					if (diagonalCount >= 4)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					x = origX;
+					y = origY;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
+		
+		// reset count before checking new direction
+		diagonalCount = 1;
+		
+		//check /
+		// northeast
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+				x--;
+				y++;
+				if (board[x][y] == p.getTokenColor())
+				{
+					diagonalCount++;
+					if (diagonalCount >= 4)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					x = origX;
+					y = origY;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
+		// southwest
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+				x++;
+				y--;
+				if (board[x][y] == p.getTokenColor())
+				{
+					diagonalCount++;
+					if (diagonalCount >= 4)
+					{
+						return true;
+					}
+				}
+				else
+				{
+					x = origX;
+					y = origY;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
 		return false;
 	}
 	  
