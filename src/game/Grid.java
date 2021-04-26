@@ -112,7 +112,8 @@ public class Grid {
 	}
 
 	
-	public boolean checkForWin(int x, int y, Player p) {
+	public boolean checkForWin(int x, int y, Player p) 
+	{
 		if (checkHorizontalWin(x, y, p) || checkVerticalWin(x, y, p) || checkDiagonalWin(x, y, p))
 		{
 			return true;
@@ -126,12 +127,76 @@ public class Grid {
 	public boolean checkHorizontalWin(int x, int y, Player p) 
 	{
 		// check Y of [x][y]
+		int count = 1;
+		int origX = x;
+		int origY = y;
+		// check left
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+			  y--;
+			  if (board[x][y] == p.getTokenColor())
+			  {
+			    count++;
+			    if (count >= 4)
+			    {
+			      return true;
+			    }
+			  }
+			  else
+			  {
+			    x = origX;
+			    y = origY;
+			    break;
+			  }
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
+		
+		// check right
+		try
+		{
+			while (board[x][y] == p.getTokenColor())
+			{
+			  y++;
+			  if (board[x][y] == p.getTokenColor())
+			  {
+			    count++;
+			    if (count >= 4)
+			    {
+			      return true;
+			    }
+			  }
+			  else
+			  {
+			    x = origX;
+			    y = origY;
+			    break;
+			  }
+			}
+		}
+		catch (Exception e)
+		{
+			x = origX;
+			y = origY;
+		}
 		return false;
 	}
 	
 	public boolean checkVerticalWin(int x, int y, Player p) 
 	{
 		// check X of [x][y]
+		// does not currently work
+        for (int row = 0; row < ROW_COUNT; row++) {
+            if (board[row][y] != p.getTokenColor()) {
+                    return false;
+            }
+        }
 		return false;
 	}
 	
