@@ -25,14 +25,16 @@ public class Grid {
 	}
   
 	public void displayBoard() {
-		System.out.println("1 2 3 4 5 6 7");
+		System.out.println(" ________________________ ");
+		System.out.println("|     1 2 3 4 5 6 7      |");
 		for (int row = 0; row < board.length; row++) {
+			System.out.print("|     ");
             for (int col = 0; col < board[row].length; col++) {
                 System.out.print(board[row][col] + " ");
             }
-            System.out.println();
+            System.out.println("     |");
         }
-		System.out.println("-------------------------------------");
+		System.out.println("|________________________|");
 	}
 	
 	public boolean placeToken(int chosenCol, Player p) {
@@ -190,14 +192,31 @@ public class Grid {
 	
 	public boolean checkVerticalWin(int x, int y, Player p) 
 	{
-		// check X of [x][y]
-		// does not currently work
-        for (int row = 0; row < ROW_COUNT; row++) {
-            if (board[row][y] != p.getTokenColor()) {
-                    return false;
-            }
-        }
-		return false;
+		int count = 1;
+		try
+		{
+	        while (board[x][y] == p.getTokenColor())
+			{
+	        	x++;
+	        	if (board[x][y] == p.getTokenColor())
+	        	{
+	        		count++;
+					if (count >= 4)
+					{
+						return true;
+					}
+	        	}
+	        	else
+	        	{
+	        		return false;
+	        	}
+			}
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+        return false;
 	}
 	
 	public boolean checkDiagonalWin(int x, int y, Player p) 
