@@ -37,7 +37,7 @@ public class Grid {
 		System.out.println("|________________________|");
 	}
 	
-	public boolean placeToken(int chosenCol, Player p) {
+	public String placeToken(int chosenCol, Player p) {
 		chosenCol = chosenCol - 1; // changing user selected column to 0 base
 		boolean gameDraw = false;
 		boolean gameWin = false;
@@ -66,22 +66,24 @@ public class Grid {
 			{
 				clearBoard();
 				System.out.println("Player " + p.getTeamNum() + " wins!");
+				return "win";
 			}
 			else
 			{
 				gameDraw = checkMaxMoves();
 				if (gameDraw)
 				{
+					System.out.println("Draw!");
 					clearBoard();
-					displayBoard();
+					return "draw";
 				}
 			}
-			return true;
+			return "placed";
 		}
 		else
         {
 			System.out.println("That column is full!");
-			return false;
+			return "full column";
         }
 	}
 	

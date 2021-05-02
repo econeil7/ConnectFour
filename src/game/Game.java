@@ -20,60 +20,113 @@ public class Game {
       g.populateBoard();
       g.displayBoard();
       int col;
-      boolean proceed = true;
+      String gameState, playAgain;
+      boolean invalidInput, fullCol;
       boolean running = true;
-		while (running)
+      int turn = 1;
+      while (running)
       {
-			if (proceed)
-			{
-	            boolean invalidInput = false;
-	            while (!invalidInput)
-	            {
-		            System.out.print("Player 1, please select a column: ");
-		            col = scanner.nextInt();
+    	  if (turn == 0)
+    	  {
+    		  invalidInput = true;
+    		  while (invalidInput)
+    		  {
+	    		  System.out.print("Play again [y/n]? ");
+	    		  playAgain = scanner.next();
+	    		  if (playAgain.equals("y"))
+	    		  {
+	    			  g.displayBoard();
+	    			  turn++;
+	    			  invalidInput = false;
+	    		  }
+	    		  else if (playAgain.equals("n"))
+	    		  {
+	    			  running = false;
+	    			  break;
+	    		  }
+	    		  else
+	    		  {
+	    			  System.out.println("Sorry, please type either 'y' or 'n'.");
+	    		  }
+    		  }
+    	  }
+    	  else if (turn % 2 == 1)
+    	  {
+	    	  System.out.print("Player 1, please select a column: ");
+	    	  col = scanner.nextInt();
+	    	  invalidInput = true;
+	          while (invalidInput)
+	          {
 		            if (col >= 1 && col <= 7)
 		            {
-		            	invalidInput = true;
-			            proceed = g.placeToken(col, p1);
+		            	invalidInput = false;
+		          	  	gameState = g.placeToken(col, p1);
+		          	  	if (gameState == "win")
+		          	  	{
+		          	  		g.clearBoard();
+		          	  		turn = 0;
+		          	  		break;
+		          	  	}
+		          	  	else if (gameState == "draw")
+		          	  	{
+		          	  		g.clearBoard();
+		          	  		turn = 0;
+		          	  		break;
+		          	  	}
+		          	  	else if (gameState == "full column")
+		          	  	{
+		          	  		System.out.println("That column is full. Please choose a different one.");
+		          	  	}
+		          	  	else
+		          	  	{
+		          	  		turn++;
+		          	  	}
 		            }
 		            else
 		            {
 		            	System.out.println("Invalid input. Please try again with a number between 1 and 7.");
 		            }
-	            }
-			}
-			else
-			{
-				proceed = true;
-			}
-			if (proceed)
-			{
-				boolean invalidInput = false;
-	            while (!invalidInput)
-	            {
-		            System.out.print("Player 2, please select a column: ");
-		            col = scanner.nextInt();
-		            if (col >= 1 && col <= 7)
+	          }
+    	  }
+    	  else
+    	  {
+			  System.out.print("Player 2, please select a column: ");
+	    	  col = scanner.nextInt();
+	    	  invalidInput = true;
+	          while (invalidInput)
+	          {
+	        	  if (col >= 1 && col <= 7)
 		            {
-		            	invalidInput = true;
-			            proceed = g.placeToken(col, p2);
+		            	invalidInput = false;
+		          	  	gameState = g.placeToken(col, p2);
+		          	  	if (gameState == "win")
+		          	  	{
+		          	  		g.clearBoard();
+		          	  		turn = 0;
+		          	  		break;
+		          	  	}
+		          	  	else if (gameState == "draw")
+		          	  	{
+		          	  		g.clearBoard();
+		          	  		turn = 0;
+		          	  		break;
+		          	  	}
+		          	  	else if (gameState == "full column")
+		          	  	{
+		          	  		System.out.println("That column is full. Please choose a different one.");
+		          	  	}
+		          	  	else
+		          	  	{
+		          	  		turn++;
+		          	  	}
 		            }
 		            else
 		            {
 		            	System.out.println("Invalid input. Please try again with a number between 1 and 7.");
 		            }
-	            }
-			}
-			else
-			{
-				proceed = true;
-			}
+	          }
+    	  }
       }
-      g.clearBoard();
-      g.populateBoard();
-  }
-  
-  public void resetGame() {
-    
+      System.out.println("Thanks for playing!");
   }
 }
