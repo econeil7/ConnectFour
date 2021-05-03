@@ -63,6 +63,7 @@ public class Game {
 					  	gameState = g.placeToken(col, p1);
 					  	if (gameState == "win")
 					  	{
+					  		p1.incrementWinCount();
 					  		g.clearBoard();
 					  		turn = 0;
 					  		break;
@@ -101,6 +102,7 @@ public class Game {
 		          	  	gameState = g.placeToken(col, p2);
 		          	  	if (gameState == "win")
 		          	  	{
+					  		p2.incrementWinCount();
 		          	  		g.clearBoard();
 		          	  		turn = 0;
 		          	  		break;
@@ -128,5 +130,7 @@ public class Game {
     	  }
       }
       System.out.println("Thanks for playing!");
+      System.out.println("Player 1 won " + p1.getWinCount() + " times!");
+      System.out.println("Player 2 won " + p2.getWinCount() + " times!");
   }
 }
