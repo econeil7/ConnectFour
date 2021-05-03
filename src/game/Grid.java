@@ -82,7 +82,6 @@ public class Grid {
 		}
 		else
         {
-			System.out.println("That column is full!");
 			return "full column";
         }
 	}
